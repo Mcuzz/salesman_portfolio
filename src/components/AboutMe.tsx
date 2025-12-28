@@ -104,7 +104,7 @@ export default function AboutMe() {
               Arquitecto
             </h2>
 
-            <p className={` text-white text-sm sm:text-base md:text-lg mt-6 leading-relaxed`}>
+            <p className={` text-white text-sm sm:text-base md:text-lg mt-6 leading-relaxed text-justify`}>
               Disfruto enfocandome en el diseño de espacios inspiradores y
               funcionales, donde la estructura y la luz definen la experiencia
               del habitar.

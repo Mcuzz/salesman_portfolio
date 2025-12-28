@@ -101,7 +101,7 @@ export default function ProjectDetail({
 
             {/* Título principal */}
             <h1
-              className={`${square.className} text-6xl mt-6 font-bold leading-tight`}
+              className={`${square.className} text-8xl mt-6 font-bold leading-tight`}
             >
               {activeProject.title}
             </h1>
