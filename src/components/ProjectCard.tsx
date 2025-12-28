@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
 import localFont from "next/font/local";
 
 const Outward = localFont({
-  src: "../../public/fonts/outward.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "400",
   style: "normal",
   variable: "--font-outward",
 });
 const Geist = localFont({
-  src: "../../public/fonts/Square.ttf",
+  src: "../../public/fonts/Code.otf",
   weight: "400",
   style: "normal",
   variable: "--font-geist",
@@ -32,20 +31,33 @@ export default function ProjectCard({
   description,
   images,
   number,
+  isActive = false,
+  onSelect,
 }: ProjectCardProps) {
-  const [expanded, setExpanded] = useState(false);
+  const baseHeight = 250; // altura base de la tarjeta
+  const expandedHeight = 450; // altura cuando está expandida
 
   return (
     <motion.div
       layout
-      onClick={() => setExpanded(!expanded)}
+      onClick={() => onSelect && onSelect(id)}
       className="flex w-full max-w-6xl cursor-pointer overflow-hidden shadow-lg bg-white"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: isActive ? 1 : 0.95,
+        height: isActive ? expandedHeight : baseHeight,
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {/* Imagen izquierda */}
-      <motion.div className="flex-1 relative" style={{ minWidth: 300 }}>
+      <motion.div
+        className="flex-1 relative overflow-hidden"
+        style={{ minWidth: 300, height: "100%" }}
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      >
         <Image
           src={images}
           alt={title}
@@ -53,7 +65,7 @@ export default function ProjectCard({
           height={500}
           style={{
             width: "100%",
-            height: "250px",
+            height: "100%",
             objectFit: "cover",
           }}
         />
@@ -61,15 +73,15 @@ export default function ProjectCard({
 
       {/* Contenedor derecho */}
       <div className="flex flex-row">
-        {/* Negro vertical con número */}
-        <div className="bg-black w-12 flex items-center justify-center max-h-f">
+        {/* Negro vertical con número y logo abajo */}
+        <div className="bg-black w-12 flex flex-col items-center justify-center">
           <span
-            className={`${Geist.className} text-white text-xl `}
-            style={{ transform: "rotate(270deg)" }}
+            className={`${Geist.className} text-white text-xl whitespace-nowrap`}
+            style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}
           >
             {number}
-            
           </span>
+          <img src="/logow.png" alt="Logo" className="h-6 w-auto mt-28" />
         </div>
 
         {/* Gris expandible hacia la derecha */}
@@ -77,16 +89,16 @@ export default function ProjectCard({
           layout
           className="bg-gray-200 relative overflow-hidden"
           initial={{ width: 64 }}
-          animate={{ width: expanded ? 400 : 64 }}
+          animate={{ width: isActive ? 400 : 64 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           {/* Pestaña rosa superior */}
-          <div className="bg-[#ff2c65] w-full h-12 flex items-center justify-center">
+          <div className="bg-[#ff2c65] w-full h-12 flex items-center justify-start px-4">
             <img src="/logo.png" alt="Logo" className="h-6 w-auto" />
           </div>
 
           {/* Contenido expandido */}
-          {expanded && (
+          {isActive && (
             <motion.div
               layout
               initial={{ opacity: 0 }}
@@ -97,7 +109,12 @@ export default function ProjectCard({
               <h3 className={`${Outward.className} text-2xl font-bold mb-2`}>
                 {title}
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p
+                className={`${Geist.className} text-gray-700 text-sm leading-relaxed mb-4 break-words`}
+                style={{
+                  maxWidth: "47%", // asegura que no sobrepase el panel gris
+                }}
+              >
                 {description}
               </p>
             </motion.div>

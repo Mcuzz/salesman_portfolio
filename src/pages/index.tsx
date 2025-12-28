@@ -232,31 +232,18 @@ export default function Home() {
               transition={{ duration: 0.4 }}
             >
               {/* ===================== PROJECTS GRID ===================== */}
-              <section
-                className="
-                mt-10 w-full 
-                grid gap-6 
-                grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 
-                px-4 sm:px-6
-                lg:max-w-6xl lg:mx-auto"
-              >
-                {projects.map((project, i) => (
-                  <div
+              <section className="mt-10 w-full grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 px-4 sm:px-6 lg:max-w-6xl lg:mx-auto">
+                {projects.map((project) => (
+                  <ProjectCard
                     key={project.id}
-                    ref={(el) => {
-                      cardsRef.current[i] = el;
-                    }}
-                  >
-                    <ProjectCard
-                      id={project.id}
-                      title={project.title}
-                      description={project.description}
-                      images={project.images[0].src}
-                      isActive={activeProject === project.id}
-                      onSelect={handleSelect}
-                      number={project.id}
-                    />
-                  </div>
+                    id={project.id}
+                    title={project.title}
+                    description={project.description}
+                    images={project.images[0].src}
+                    number={project.id}
+                    isActive={activeProject === project.id}
+                    onSelect={handleSelect}
+                  />
                 ))}
               </section>
             </motion.div>
