@@ -39,8 +39,6 @@ export default function ProjectDetail({
 
   return (
     <div className="min-h-screen pt-1 relative">
-      {" "}
-      {/* <- hacer el contenedor relativo */}
       <div className="max-w-6xl mx-auto px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Imagen principal */}
@@ -52,7 +50,7 @@ export default function ProjectDetail({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-full h-[70vh]"
+                className="relative w-full h-[80vh]"
                 layoutId={`shared-image-${activeProject.id}`}
               >
                 <Image
@@ -84,57 +82,72 @@ export default function ProjectDetail({
           </div>
 
           {/* Texto */}
-          <div className="flex flex-col">
-            <h5 className={`${square.className} text-2xl font-bold mt-6`}>
+          <div className="flex flex-col relative">
+            {/* Código de proyecto */}
+            <h5
+              className={`${square.className} text-3xl font-bold mt-16 tracking-widest`}
+            >
               {activeProject.id}
             </h5>
+
+            {/* Nota técnica */}
+            
+            {/* Línea identitaria */}
             <h4
-              className={` text-sm relative left-40`}
+              className={`${square.className} text-lg mt-10 tracking-wider`}
             >
-              Gracias a la colaboracion
+              Estudio de arquitectura experimental
             </h4>
 
-            <h4
-              className={`${square.className} text-xl relative`}
+            {/* Título principal */}
+            <h1
+              className={`${square.className} text-6xl mt-6 font-bold leading-tight`}
             >
-               Te quiero
-            </h4>
-
-            <h1 className={`${square.className} text-6xl mt-8 font-bold`}>
               {activeProject.title}
             </h1>
+
+            {/* Descripción principal */}
             <p
-              className="text-black-900 mt-4 leading-relaxed"
-              style={{
-                maxWidth: "80%", // asegura que no sobrepase el panel gris
-              }}
+              className="text-black-900 mt-6 leading-relaxed"
+              style={{ maxWidth: "80%" }}
             >
               {activeProject.description}
+            </p>
+
+            {/* Párrafo editorial extra */}
+            <p
+              className="text-black-700 mt-4 leading-relaxed text-justify"
+              style={{ maxWidth: "80%" }}
+            >
+              Este proyecto explora la relación entre estructura y vacío como
+              principio generador del espacio. La geometría se entiende como
+              proceso y no como resultado final, articulando recorridos, luz y
+              materialidad en una narrativa espacial coherente, waaa waaa waaaaa.
             </p>
 
             <AnimatePresence mode="wait">
               <motion.p
                 key={imageIndex}
-                className="text-black-600 mt-6"
+                className="text-black-600 mt-6 text-sm"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3 }}
-                style={{
-                  maxWidth: "80%", // asegura que no sobrepase el panel gris
-                }}
+                style={{ maxWidth: "80%" }}
               >
                 {images[imageIndex]?.description}
               </motion.p>
             </AnimatePresence>
+
+            {/* Año / fase en vertical */}
             <h1
-              className={`${square.className} text-6xl mt-0 font-bold`}
+              className={`${square.className} text-5xl font-bold absolute right-0 bottom-0`}
               style={{
                 writingMode: "vertical-lr",
                 transform: "rotate(180deg)",
               }}
             >
-              2025.00
+              2025 · 28 · 12
             </h1>
           </div>
         </div>
@@ -164,18 +177,21 @@ export default function ProjectDetail({
           ))}
         </div>
       </div>
+
+      {/* Rectángulo rosa de fondo */}
       <motion.div
         initial={{ x: "100%" }}
         animate={{ x: "0%" }}
         transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-        className="absolute inset-0 max-w-[550px] left-[700px] bg-[#FF2C65] pointer-events-none z--10"
+        className="absolute inset-0 max-w-[550px] left-[700px] bg-[#FF2C65] pointer-events-none -z-10"
       >
         <img
           src="/logo.png"
           alt="Logo"
-          className="absolute top-8 right-3 h-20 w-auto"
+          className="absolute top-20 right-6 h-20 w-auto"
         />
       </motion.div>
     </div>
   );
 }
+
