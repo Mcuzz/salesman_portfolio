@@ -9,6 +9,9 @@ export default function IntroPage({ onFinish }: IntroPageProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const logoRef = useRef<HTMLImageElement | null>(null);
   const ranRef = useRef(false);
+  const handleFinish = () => {
+    onFinish();
+  };
 
   useEffect(() => {
     if (ranRef.current) return;
@@ -44,6 +47,8 @@ export default function IntroPage({ onFinish }: IntroPageProps) {
     };
   }, [onFinish]);
 
+   return <IntroPage onFinish={handleFinish} />;
+   
   return (
     <div
       ref={containerRef}
