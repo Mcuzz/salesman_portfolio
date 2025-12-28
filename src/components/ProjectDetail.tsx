@@ -85,15 +85,30 @@ export default function ProjectDetail({
 
           {/* Texto */}
           <div className="flex flex-col">
-            <h1 className={`${square.className} text-4xl mt-24 font-bold`}>
+            <h5 className={`${square.className} text-2xl font-bold mt-6`}>
+              {activeProject.id}
+            </h5>
+            <h4
+              className={` text-sm relative left-40`}
+            >
+              Gracias a la colaboracion
+            </h4>
+
+            <h4
+              className={`${square.className} text-xl relative`}
+            >
+               Te quiero
+            </h4>
+
+            <h1 className={`${square.className} text-6xl mt-8 font-bold`}>
               {activeProject.title}
             </h1>
-            <p className="text-black-900 mt-4 leading-relaxed"
-            style={{
-                  maxWidth: "80%", // asegura que no sobrepase el panel gris
-                }}
+            <p
+              className="text-black-900 mt-4 leading-relaxed"
+              style={{
+                maxWidth: "80%", // asegura que no sobrepase el panel gris
+              }}
             >
-
               {activeProject.description}
             </p>
 
@@ -112,8 +127,13 @@ export default function ProjectDetail({
                 {images[imageIndex]?.description}
               </motion.p>
             </AnimatePresence>
-            <h1 className={`${square.className} text-6xl mt-0 font-bold`}
-          style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}>
+            <h1
+              className={`${square.className} text-6xl mt-0 font-bold`}
+              style={{
+                writingMode: "vertical-lr",
+                transform: "rotate(180deg)",
+              }}
+            >
               2025.00
             </h1>
           </div>
