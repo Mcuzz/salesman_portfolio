@@ -120,8 +120,20 @@ export default function Home() {
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="absolute inset-0 bg-[#FF2C65]/30 pointer-events-none"
+            className="absolute inset-0 bg-[gray]/30 pointer-events-none"
           />
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: "0%" }}
+            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+            className="absolute inset-0 max-w-60 left-3 bg-[#FF2C65] pointer-events-none"
+          >
+            {/*<img
+              src="/logo.png"
+              alt="Logo"
+              className="absolute top-9 right-3 h-10 w-auto"
+            />*/}
+          </motion.div>
 
           {/* ---------- Contenido alineado con las cards ---------- */}
           <div className="relative z-100mx-auto max-w-6xl px-6 py-24 text-white">
@@ -139,6 +151,7 @@ export default function Home() {
                    font-bold
                    leading-[0.85]
                    flex flex-col
+                   text-black
                  `}
               >
                 <span>SAL</span>
@@ -232,19 +245,39 @@ export default function Home() {
               transition={{ duration: 0.4 }}
             >
               {/* ===================== PROJECTS GRID ===================== */}
-              <section className="mt-10 w-full grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 px-4 sm:px-6 lg:max-w-6xl lg:mx-auto">
-                {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    id={project.id}
-                    title={project.title}
-                    description={project.description}
-                    images={project.images[0].src}
-                    number={project.id}
-                    isActive={activeProject === project.id}
-                    onSelect={handleSelect}
-                  />
-                ))}
+              <h3
+                className={`${Geist.className} text-5xl font-bold mb-4 max-w-[1080px] mx-auto`}
+              >
+                OVERVIEW
+              </h3>
+              <p className={`mb-6 max-w-[1080px] mx-auto`}>
+                Vista rapida a los proyectos y conceptos para darte una idea de
+                mi enfoque, estetica e ideas que quiero proyectar.
+              </p>
+              <section
+                className="mt-10 w-full grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-6 lg:max-w-6xl lg:mx-auto"
+                style={{ maxWidth: "1160px", margin: "40px auto" }}
+              >
+                {projects.map((project) => {
+                  const isActive = activeProject === project.id;
+
+                  return (
+                    <div
+                      key={project.id}
+                      className={isActive ? "lg:col-span-2" : ""}
+                    >
+                      <ProjectCard
+                        id={project.id}
+                        title={project.title}
+                        description={project.description}
+                        images={project.images[0].src}
+                        number={project.id}
+                        isActive={isActive}
+                        onSelect={handleSelect}
+                      />
+                    </div>
+                  );
+                })}
               </section>
             </motion.div>
           )}
