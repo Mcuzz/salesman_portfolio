@@ -31,7 +31,7 @@ const Outward = localFont({
 });
 
 const square = localFont({
-  src: "../../public/fonts/square.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "400",
   style: "normal",
   variable: "--font-square",
