@@ -2,102 +2,95 @@
 import { useState } from "react";
 import Link from "next/link";
 import localFont from "next/font/local";
+import { useRouter } from "next/router";
+
 const Scrambled = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "400",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "600",
   style: "normal",
   variable: "--font-scrambled",
 });
 
-export default function Navbar({ visible }: { visible: boolean }) {
+export default function Navbar({ inverted }: { inverted?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const isHome = router.pathname === "/";
+  const isInverted = isHome ? inverted : true;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <header
+      className={`
+        fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b shadow-sm
+        transition-colors duration-500
+        ${inverted ? "bg-black border-gray-800" : "bg-white border-gray-200"}
+      `}
+    >
       <nav className="max-w-[1130px] mx-auto px-6 h-16 flex items-center">
-        
-        {/* Logo a la izquierda */}
+        {/* Logo */}
         <Link
           href="/"
-          className="h-10 flex items-center hover:opacity-80 transition-opacity duration-200"
+          className="h-10 flex items-center transition-opacity duration-300 hover:opacity-80"
         >
-          <img src="/logow.png" alt="Logo" className="h-10 w-auto ml-2" />
+          <img
+            src={inverted ? "/logow.png" : "/logo.png"}
+            alt="Logo"
+            className="h-10 w-auto ml-2 transition-all duration-500"
+          />
         </Link>
 
-        {/* Empuja todo lo demás a la derecha */}
         <div className="ml-auto flex items-center">
-          
           {/* Desktop menu */}
           <div className="hidden md:flex gap-8">
-            <Link
-              href="/"
-              className={`${Scrambled.className} text-white font-medium hover:text-[#FF2C65] transition-transform duration-200 hover:scale-105`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/projects"
-              className={`${Scrambled.className} text-white font-medium hover:text-[#FF2C65] transition-transform duration-200 hover:scale-105`}
-            >
-              Projects
-            </Link>
-            <Link
-              href="/about-me"
-              className={`${Scrambled.className} text-white font-medium hover:text-[#FF2C65] transition-transform duration-200 hover:scale-105`}
-            >
-              About me
-            </Link>
-            <Link
-              href="/contact"
-              className={`${Scrambled.className} text-white font-medium hover:text-[#FF2C65] transition-transform duration-200 hover:scale-105`}
-            >
-              Contact
-            </Link>
+            {["HOME", "PROJECTS", "ABOUT ME", "CONTACT"].map((item) => (
+              <Link
+                key={item}
+                href={`/${item === "HOME" ? "" : item.toLowerCase().replace(" ", "-")}`}
+                className={`
+                  ${Scrambled.className} font-medium transition-all duration-500 hover:scale-105
+                  ${inverted ? "text-white hover:text-[#FF2C65]" : "text-black hover:text-[#FF2C65]"}
+                `}
+              >
+                {item}
+              </Link>
+            ))}
           </div>
 
-          {/* Hamburger button - móvil */}
+          {/* Hamburger */}
           <button
-            className="md:hidden ml-4 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="md:hidden ml-4 p-2 rounded-md"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? (
-              <img src="/icons/close.svg" alt="Close menu" className="h-6 w-6" />
-            ) : (
-              <img src="/icons/menu.svg" alt="Open menu" className="h-6 w-6" />
-            )}
+            <img
+              src={menuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
+              alt="Menu"
+              className={`h-6 w-6 transition duration-500 ${inverted ? "invert" : ""}`}
+            />
           </button>
         </div>
       </nav>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black/90 backdrop-blur-md border-t border-gray-200 shadow-md">
-
+        <div
+          className={`
+            md:hidden backdrop-blur-md border-t shadow-md transition-colors duration-500
+            ${inverted ? "bg-black/90 border-gray-800" : "bg-white/90 border-gray-200"}
+          `}
+        >
           <div className="flex flex-col px-6 py-4 gap-4">
-            <Link
-              href="/"
-              className={`${Scrambled.className} text-white-700 font-medium hover:text-black transition-transform duration-200 hover:scale-105`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/projects"
-              className={`${Scrambled.className} text-white-700 font-medium hover:text-black transition-transform duration-200 hover:scale-105`}
-            >
-              Projects
-            </Link>
-            <Link
-              href="/about-me"
-              className={`${Scrambled.className} text-white-700 font-medium hover:text-black transition-transform duration-200 hover:scale-105`}
-            >
-              About me
-            </Link>
-            <Link
-              href="/contact"
-              className={`${Scrambled.className} text-white-700 font-medium hover:text-black transition-transform duration-200 hover:scale-105`}
-            >
-              Contact
-            </Link>
+            {["Home", "Projects", "About me", "Contact"].map((item) => (
+              <Link
+                key={item}
+                href={`/${item === "Home" ? "" : item.toLowerCase().replace(" ", "-")}`}
+                className={`
+                  ${Scrambled.className} font-medium transition-all duration-500 hover:scale-105
+                  ${inverted ? "text-white hover:text-[#FF2C65]" : "text-black hover:text-[#FF2C65]"}
+                `}
+              >
+                {item}
+              </Link>
+            ))}
           </div>
         </div>
       )}

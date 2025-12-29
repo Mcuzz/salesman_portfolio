@@ -4,14 +4,14 @@ import localFont from "next/font/local";
 import { useRouter } from "next/router";
 
 const Outward = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "400",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "600",
   style: "normal",
   variable: "--font-outward",
 });
 const Geist = localFont({
-  src: "../../public/fonts/Code.otf",
-  weight: "400",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "600",
   style: "normal",
   variable: "--font-geist",
 });
@@ -123,7 +123,7 @@ export default function ProjectCard({
                 {title}
               </h3>
               <p
-                className={`${Geist.className} text-gray-700 text-sm leading-relaxed mb-4 break-words`}
+                className={` text-gray-700 text-sm leading-relaxed mb-4 break-words`}
                 style={{
                   maxWidth: "100%", // asegura que no sobrepase el panel gris
                 }}

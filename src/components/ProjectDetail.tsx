@@ -7,8 +7,8 @@ import { Project } from "../data/projects";
 import localFont from "next/font/local";
 
 const square = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "400",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "700",
   style: "normal",
   variable: "--font-outward",
 });
@@ -101,7 +101,7 @@ export default function ProjectDetail({
               <img
                 src="/logo.png"
                 alt="Logo"
-                className="absolute top-20 right-6 h-16 md:h-20 w-auto"
+                className="absolute top-20 right-6 h-16 md:h-12 w-auto"
               />
             </motion.div>
 
@@ -125,7 +125,7 @@ export default function ProjectDetail({
               </h5>
 
               <h4
-                className={`${square.className} text-base md:text-lg mt-6 tracking-wider`}
+                className={` text-base md:text-lg mt-6 tracking-wider`}
               >
                 Estudio de arquitectura experimental
               </h4>
@@ -136,7 +136,7 @@ export default function ProjectDetail({
                 {activeProject.title}
               </h1>
 
-              <p className="text-black mt-6 leading-relaxed break-words">
+              <p className="text-black mt-6 leading-relaxed break-words max-w-[380px] text-justify">
                 {activeProject.description}
               </p>
 

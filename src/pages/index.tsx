@@ -11,8 +11,8 @@ import { useRouter } from "next/router";
 import intro from "@/components/intro";
 
 const Geist = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "710",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "600",
   style: "normal",
   variable: "--font-geist",
 });
@@ -23,44 +23,37 @@ const Geist2 = localFont({
   style: "normal",
   variable: "--font-geist2",
 });
-const Outward = localFont({
-  src: "../../public/fonts/outward.ttf",
-  weight: "400",
-  style: "normal",
-  variable: "--font-outward",
-});
-
-const square = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "400",
-  style: "normal",
-  variable: "--font-square",
-});
 
 const sections = ["Architectural projects", "Artistic projects"];
 
 export default function Home() {
+  // ================== STATE ==================
   const [activeProject, setActiveProject] = useState<string | null>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState("Architectural projects");
   const [showIntro, setShowIntro] = useState(true);
+  const [navbarInverted, setNavbarInverted] = useState(false);
+
+  // ================== REFS ==================
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
+
+  // ================== EFFECTS ==================
 
   // Animación inicial de entrada de las cards
   useEffect(() => {
     cardsRef.current.forEach((card, index) => {
-      if (card) {
-        card.style.opacity = "0";
-        setTimeout(() => {
-          card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-          card.style.opacity = "1";
-          card.style.transform = "translateY(0)";
-        }, index * 150); // animación escalonada
-      }
+      if (!card) return;
+      card.style.opacity = "0";
+      setTimeout(() => {
+        card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      }, index * 150);
     });
   }, []);
 
-  //detectar clicks afuera del contenedor:
+  // Detectar clicks afuera del contenedor
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (
@@ -80,17 +73,33 @@ export default function Home() {
     };
   }, []);
 
+  // Invertir navbar al pasar el hero
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      const heroHeight = heroRef.current.offsetHeight;
+      setNavbarInverted(!(window.scrollY > heroHeight - 80));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ================== HANDLERS ==================
   const handleSelect = (id: string) => {
     setActiveProject((prev) => (prev === id ? null : id));
   };
 
   return (
     <Layout>
-      <Navbar visible={true} />
+      <Navbar inverted={navbarInverted} />
 
       <main className="pt-10">
         {/* ===================== HERO SECTION ===================== */}
         <motion.section
+          ref={heroRef}
           exit={{ opacity: 0, y: 40 }}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,7 +135,7 @@ export default function Home() {
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="absolute inset-0 max-w-60 left-3 bg-[#FF2C65] pointer-events-none"
+            className="absolute inset-0 max-w-60 left-7 bg-[#FF2C65] pointer-events-none"
           >
             {/*<img
               src="/logo.png"
@@ -167,7 +176,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5, duration: 1 }}
-                  className={`${square.className} text-2xl sm:text-5xl font-semibold`}
+                  className={`${Geist.className} text-2xl sm:text-5xl font-semibold`}
                 >
                   <span className="block">SALESMAN - PORTFOLIO</span>
                   <span className="block"> Architecture</span>

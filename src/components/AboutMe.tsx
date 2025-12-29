@@ -5,23 +5,18 @@ import localFont from "next/font/local";
 import { useState } from "react";
 
 const Scrambled = localFont({
-  src: "../../public/fonts/Square.ttf",
-  weight: "400",
+  src: "../../public/fonts/Geist.ttf",
+  weight: "600",
   style: "normal",
   variable: "--font-scrambled",
 });
 
-const Code = localFont({
-  src: "../../public/fonts/Code.otf",
-  weight: "400",
-  style: "normal",
-  variable: "--font-scrambled",
-});
 
 const sections = ["About", "CV", "Servicios", "Campos", "Alcances"];
 
 export default function AboutMe() {
   const [activeSection, setActiveSection] = useState("About");
+  
 
   return (
     <motion.div
@@ -54,7 +49,7 @@ export default function AboutMe() {
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="absolute top-0 left-10 h-full w-[45%] bg-[#FF2C65] pointer-events-none" //traslúcida = bg-red-[x]/50
+            className="absolute top-0 left-14 h-full w-[35%] bg-[#FF2C65] pointer-events-none" //traslúcida = bg-red-[x]/50
           />
         </div>
 
@@ -73,23 +68,29 @@ export default function AboutMe() {
           </motion.div>
         </div>
 
+
+
         {/* Nombre */}
         <div
-          className={`${Scrambled.className} absolute left-[10%] top-1/3 -translate-y-1/2 text-4xl sm:text-6xl font-light`}
+          className={`${Scrambled.className} absolute left-[10%] top-1/4 -translate-y-1/2 text-4xl sm:text-6xl font-light`}
         >
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            <h1 className="text-white text-7x1 font-bold">DIEGO LOPEZ</h1>
+            <h5 className="text-black text-3xl font-light mb-10">
+              2005.11.15
+            </h5>
+
+            <h1 className={`${Scrambled.className} text-2xl sm:text-5xl font-semibold`}>DIEGO-LOPEZ</h1>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            <h1 className="text-white text-7x1 font-bold">RODRIGUEZ</h1>
+            <h1 className="text-5xl font-bold">RODRIGUEZ--</h1>
           </motion.div>
         </div>
 
@@ -100,11 +101,11 @@ export default function AboutMe() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1.5 }}
           >
-            <h2 className={` text-white text-lg sm:text-2xl md:text-3xl font-semibold`}>
-              Arquitecto
+            <h2 className={`${Scrambled.className} text-lg sm:text-2xl md:text-3xl mb-4`}>
+              ARQUITECTO
             </h2>
 
-            <p className={` text-white text-sm sm:text-base md:text-lg mt-6 leading-relaxed text-justify`}>
+            <p className={`text-base sm:text-lg max-w-[300px] text-justify`}>
               Disfruto enfocandome en el diseño de espacios inspiradores y
               funcionales, donde la estructura y la luz definen la experiencia
               del habitar.
@@ -124,7 +125,7 @@ export default function AboutMe() {
                     className={`${
                       Scrambled.className
                     } text-lg sm:text-xl transition-colors ${
-                      isActive ? "text-white" : "text-white/60 hover:text-white"
+                      isActive ? "" : "text-white/60 hover:text-black"
                     }`}
                   >
                     {sec}
@@ -133,7 +134,7 @@ export default function AboutMe() {
                   {isActive && (
                     <motion.div
                       layoutId="about-hero-indicator"
-                      className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white"
+                      className="absolute -bottom-2 left-0 right-0 h-[2px] bg-black"
                       transition={{
                         type: "spring",
                         stiffness: 300,
@@ -160,7 +161,7 @@ export default function AboutMe() {
             <h3
               className={`${Scrambled.className} text-3xl font-bold mb-4 max-w-[900px] mx-auto`}
             >
-              Sobre mí
+              SOBRE MI
             </h3>
             <p className="mb-6 max-w-[900px] mx-auto">
               Desde que tengo memoria, siempre me ha atraído imaginar mis
