@@ -81,74 +81,96 @@ export default function ProjectDetail({
             </div>
           </div>
 
-          {/* Texto */}
-          <div className="flex flex-col relative">
-            {/* Código de proyecto */}
-            <h5
-              className={`${square.className} text-3xl font-bold mt-16 tracking-widest`}
+          {/* Texto + rectángulo rosa en contenedor compartido */}
+          <div className="relative w-full flex justify-center">
+            {/* Rectángulo rosa */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: "0%" }}
+              transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+              className="
+                absolute inset-0
+                w-full
+                md:w-[60%]
+                lg:w-[550px]
+                bg-[#FF2C65]
+                pointer-events-none
+                -z-10
+              "
             >
-              {activeProject.id}
-            </h5>
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="absolute top-6 right-6 h-16 md:h-20 w-auto"
+              />
+            </motion.div>
 
-            {/* Nota técnica */}
-            
-            {/* Línea identitaria */}
-            <h4
-              className={`${square.className} text-lg mt-10 tracking-wider`}
+            {/* Contenedor del texto */}
+            <div
+              className="
+                relative
+                w-full
+                md:w-[60%]
+                lg:w-[550px]
+                px-6
+                md:px-10
+                py-12
+                flex flex-col
+              "
             >
-              Estudio de arquitectura experimental
-            </h4>
-
-            {/* Título principal */}
-            <h1
-              className={`${square.className} text-8xl mt-6 font-bold leading-tight`}
-            >
-              {activeProject.title}
-            </h1>
-
-            {/* Descripción principal */}
-            <p
-              className="text-black-900 mt-6 leading-relaxed"
-              style={{ maxWidth: "80%" }}
-            >
-              {activeProject.description}
-            </p>
-
-            {/* Párrafo editorial extra */}
-            <p
-              className="text-black-700 mt-4 leading-relaxed text-justify"
-              style={{ maxWidth: "80%" }}
-            >
-              Este proyecto explora la relación entre estructura y vacío como
-              principio generador del espacio. La geometría se entiende como
-              proceso y no como resultado final, articulando recorridos, luz y
-              materialidad en una narrativa espacial coherente, waaa waaa waaaaa.
-            </p>
-
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={imageIndex}
-                className="text-black-600 mt-6 text-sm"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
-                style={{ maxWidth: "80%" }}
+              <h5
+                className={`${square.className} text-2xl md:text-3xl font-bold mt-8 tracking-widest`}
               >
-                {images[imageIndex]?.description}
-              </motion.p>
-            </AnimatePresence>
+                {activeProject.id}
+              </h5>
 
-            {/* Año / fase en vertical */}
-            <h1
-              className={`${square.className} text-5xl font-bold absolute right-0 bottom-0`}
-              style={{
-                writingMode: "vertical-lr",
-                transform: "rotate(180deg)",
-              }}
-            >
-              2025 · 28 · 12
-            </h1>
+              <h4
+                className={`${square.className} text-base md:text-lg mt-6 tracking-wider`}
+              >
+                Estudio de arquitectura experimental
+              </h4>
+
+              <h1
+                className={`${square.className} text-4xl md:text-6xl lg:text-7xl mt-6 font-bold leading-tight break-words`}
+              >
+                {activeProject.title}
+              </h1>
+
+              <p className="text-black mt-6 leading-relaxed break-words">
+                {activeProject.description}
+              </p>
+
+              <p className="text-black mt-4 leading-relaxed text-justify break-words max-w-[380px]">
+                Este proyecto explora la relación entre estructura y vacío como
+                principio generador del espacio. La geometría se entiende como
+                proceso y no como resultado final, articulando recorridos, luz y
+                materialidad en una narrativa espacial coherente, waaa waaa
+                waaaaa.
+              </p>
+
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={imageIndex}
+                  className="text-black mt-6 text-sm break-words"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {images[imageIndex]?.description}
+                </motion.p>
+              </AnimatePresence>
+
+              <h1
+                className={`${square.className} text-3xl md:text-5xl font-bold absolute right-0.5 bottom-4`}
+                style={{
+                  writingMode: "vertical-lr",
+                  transform: "rotate(180deg)",
+                }}
+              >
+                2025 · 28 · 12
+              </h1>
+            </div>
           </div>
         </div>
 
@@ -177,21 +199,6 @@ export default function ProjectDetail({
           ))}
         </div>
       </div>
-
-      {/* Rectángulo rosa de fondo */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: "0%" }}
-        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-        className="absolute inset-0 max-w-[550px] left-[700px] bg-[#FF2C65] pointer-events-none -z-10"
-      >
-        <img
-          src="/logo.png"
-          alt="Logo"
-          className="absolute top-20 right-6 h-20 w-auto"
-        />
-      </motion.div>
     </div>
   );
 }
-
