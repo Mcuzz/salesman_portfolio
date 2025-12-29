@@ -101,7 +101,7 @@ export default function ProjectDetail({
               <img
                 src="/logo.png"
                 alt="Logo"
-                className="absolute top-6 right-6 h-16 md:h-20 w-auto"
+                className="absolute top-20 right-6 h-16 md:h-20 w-auto"
               />
             </motion.div>
 
