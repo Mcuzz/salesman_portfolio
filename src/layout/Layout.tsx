@@ -8,7 +8,7 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div>
-      <Navbar visible={true} />
+      <Navbar inverted={true} />
       <main className="pt-20">{children}</main>
     </div>
   );

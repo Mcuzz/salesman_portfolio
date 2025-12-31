@@ -4,6 +4,12 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import { useState } from "react";
 
+const Geist = localFont({
+  src: "../../public/fonts/Square.ttf",
+  weight: "600",
+  style: "normal",
+  variable: "--font-geist",
+});
 
 export default function Contact() {
   return (

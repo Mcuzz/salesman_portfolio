@@ -11,14 +11,14 @@ import { useRouter } from "next/router";
 import intro from "@/components/intro";
 
 const Geist = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Scrambled.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-geist",
 });
 
 const Geist2 = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "400",
   style: "normal",
   variable: "--font-geist2",
@@ -135,7 +135,7 @@ export default function Home() {
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="absolute inset-0 max-w-60 left-7 bg-[#FF2C65] pointer-events-none"
+            className="absolute inset-0 max-w-72 left-7 bg-[#FF2C65] pointer-events-none"
           >
             {/*<img
               src="/logo.png"
@@ -145,7 +145,7 @@ export default function Home() {
           </motion.div>
 
           {/* ---------- Contenido alineado con las cards ---------- */}
-          <div className="relative z-100mx-auto max-w-6xl px-6 py-24 text-white">
+          <div className="relative z-100mx-auto max-w-6xl px-11 py-24 text-white">
             <div className="flex items-start gap-12">
               <motion.h1
                 initial={{ opacity: 0, x: -50 }}
@@ -171,22 +171,26 @@ export default function Home() {
                 <span>LIO</span>
               </motion.h1>
 
-              <div className="flex flex-col gap-4 max-w-xl ">
+              <div className="flex flex-col gap-4 max-w-xl">
                 <motion.h2
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5, duration: 1 }}
                   className={`${Geist.className} text-2xl sm:text-5xl font-semibold`}
                 >
-                  <span className="block">SALESMAN - PORTFOLIO</span>
-                  <span className="block"> Architecture</span>
+                  <span className="inline whitespace-nowrap max-w-screen-2xl">
+  SALESMAN - PORTFOLIO
+</span>
+<span className="block">
+  Architecture
+</span>
                 </motion.h2>
 
                 <motion.p
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7, duration: 1 }}
-                  className={`${Geist2.className} text-base sm:text-lg max-w-md`}
+                  className={`text-base sm:text-lg max-w-md`}
                 >
                   Proyectos del lindote del Diego. Este sera tu rincon
                   personalizado del internet, lindo, ayudame a volverlo cada vez
@@ -303,7 +307,7 @@ export default function Home() {
               >
                 Cuando las cards de esto esten listas...
               </h3>
-              <p className={`${Geist.className} mb-6 max-w-[900px] mx-auto`}>
+              <p className={` mb-6 max-w-[900px] mx-auto`}>
                 Aqui mi tilin agrega todos sus proyectos artisticos qque no
                 necesariamente tienen que ver con la carrera, si no con el
                 preciso placer que crear por gusto, materializar lo abstracto y

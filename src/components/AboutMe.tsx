@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { useState } from "react";
 
 const Scrambled = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-scrambled",

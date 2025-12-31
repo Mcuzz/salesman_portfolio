@@ -4,13 +4,13 @@ import localFont from "next/font/local";
 import { useRouter } from "next/router";
 
 const Outward = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-outward",
 });
 const Geist = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-geist",

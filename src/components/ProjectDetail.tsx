@@ -7,7 +7,7 @@ import { Project } from "../data/projects";
 import localFont from "next/font/local";
 
 const square = localFont({
-  src: "../../public/fonts/Geist.ttf",
+  src: "../../public/fonts/Square.ttf",
   weight: "700",
   style: "normal",
   variable: "--font-outward",
