@@ -26,6 +26,8 @@ const Geist2 = localFont({
 
 const sections = ["Architectural projects", "Artistic projects"];
 
+
+
 export default function Home() {
   // ================== STATE ==================
   const [activeProject, setActiveProject] = useState<string | null>(null);
@@ -33,10 +35,17 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [navbarInverted, setNavbarInverted] = useState(false);
 
+  const handleSelect = (id: string | null) => {
+  setActiveProject(prev => (prev === id ? null : id));
+};
+
+
   // ================== REFS ==================
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
+
+  
 
   // ================== EFFECTS ==================
 
@@ -88,9 +97,7 @@ export default function Home() {
   }, []);
 
   // ================== HANDLERS ==================
-  const handleSelect = (id: string) => {
-    setActiveProject((prev) => (prev === id ? null : id));
-  };
+  
 
   return (
     <Layout>

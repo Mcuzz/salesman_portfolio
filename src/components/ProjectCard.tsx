@@ -17,6 +17,7 @@ const Geist = localFont({
 });
 
 
+
 interface ProjectCardProps {
   id: string;
   title: string;
@@ -24,7 +25,7 @@ interface ProjectCardProps {
   images: string;
   number?: string;
   isActive?: boolean;
-  onSelect?: (id: string) => void;
+  onSelect?: (id: string | null) => void;
 }
 
 export default function ProjectCard({
@@ -39,7 +40,9 @@ export default function ProjectCard({
   const baseHeight = 450; // altura base de la tarjeta
   const expandedHeight = 550; // altura cuando está expandida
 
-  const router = useRouter( );
+  
+
+  const router = useRouter();
 
   return (
     <motion.div
@@ -47,8 +50,6 @@ export default function ProjectCard({
       onClick={() => {
         if (isActive) {
           router.push(`/projects/${id}`);
-        } else {
-          onSelect && onSelect(id);
         }
       }}
       className="flex w-full max-w-6xl cursor-pointer overflow-hidden shadow-lg bg-white"
@@ -56,7 +57,7 @@ export default function ProjectCard({
       animate={{
         opacity: 1,
         y: 0,
-        scale: isActive ? 1 : 0.9, // activa normal, las demás se encogen
+        scale: isActive ? 1 : 0.9,
         height: isActive ? expandedHeight : baseHeight,
       }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -106,7 +107,13 @@ export default function ProjectCard({
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           {/* Pestaña rosa superior */}
-          <div className="bg-[#ff2c65] w-full h-12 flex items-center justify-start px-4">
+          <div
+            onClick={(e) => {
+              e.stopPropagation(); // evita que dispare la navegación
+              onSelect && onSelect(isActive ? null : id);
+            }}
+            className="bg-[#ff2c65] w-full h-12 flex items-center justify-start px-4 cursor-pointer"
+          >
             <img src="/logo.png" alt="Logo" className="h-6 w-auto" />
           </div>
 
