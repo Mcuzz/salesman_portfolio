@@ -125,7 +125,8 @@ export default function AboutMe() {
                     className={`${
                       Scrambled.className
                     } text-lg sm:text-xl transition-colors ${
-                      isActive ? "" : "text-white/60 hover:text-black"
+                      isActive 
+                      ? "text-white" : "text-white/60 hover:text-[#FF2C65] "
                     }`}
                   >
                     {sec}
@@ -134,7 +135,7 @@ export default function AboutMe() {
                   {isActive && (
                     <motion.div
                       layoutId="about-hero-indicator"
-                      className="absolute -bottom-2 left-0 right-0 h-[2px] bg-black"
+                      className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white "
                       transition={{
                         type: "spring",
                         stiffness: 300,
