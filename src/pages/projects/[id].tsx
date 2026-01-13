@@ -1,7 +1,7 @@
 // src/pages/projects/[id].tsx
 import { GetStaticPaths, GetStaticProps } from "next";
 import { projects, Project } from "../../data/projects";
-import ProjectDetail from "../../components/ProjectDetail";
+import ProjectDetail from "../../components/ProjectDetail/ProjectDetail";
 
 interface ProjectPageProps {
   initialId: string;

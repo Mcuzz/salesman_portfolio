@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProjectCard from "@/components/ProjectCard";
-import Layout from "@/layout/Layout";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import Layout from "@/components/layout/Layout";
 
 const projects = [
   {

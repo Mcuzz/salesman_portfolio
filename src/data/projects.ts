@@ -1,5 +1,3 @@
-// src/data/projects.ts
-
 // Cada imagen es una entidad semántica completa.
 // Imagen y descripción no pueden desincronizarse.
 
@@ -8,10 +6,16 @@ export interface ProjectImage {
   description: string;
 }
 
+export type ProjectCategory =
+  | "architecture"
+  | "visual"
+  | "experimental";
+
 export interface Project {
   id: string;
   title: string;
   description: string;
+  category: ProjectCategory;
   images: ProjectImage[];
 }
 
@@ -19,6 +23,7 @@ export const projects: Project[] = [
   {
     id: "PJCT 00.1",
     title: "Project 1",
+    category: "architecture",
     description:
       "A concise architectural proposal focused on intent, constraints, and outcome...",
     images: [
@@ -42,6 +47,7 @@ export const projects: Project[] = [
   {
     id: "PJCT 00.2",
     title: "Project 2",
+    category: "architecture",
     description:
       "A visual-first project where spatial clarity replaces ornament as the main narrative device.",
     images: [
@@ -63,8 +69,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "PJCT 00.3",
-    title: "Project 3",
+    id: "PJCT A.1",
+    title: "Experimental Project",
+    category: "experimental",
     description:
       "Less decoration, more structure. An exercise in reduction and spatial discipline.",
     images: [
@@ -82,29 +89,6 @@ export const projects: Project[] = [
         src: "/projects/project-03c.jpg",
         description:
           "Interior detail: circulation is treated as an experiential sequence, not a leftover space.",
-      },
-    ],
-  },
-  {
-    id: "PJCT 00.4",
-    title: "Project 4",
-    description:
-      "A system-level solution developed as a coherent whole rather than a collection of isolated features.",
-    images: [
-      {
-        src: "/projects/project-04.jpg",
-        description:
-          "Global view: the project operates as a unified system with consistent spatial rules.",
-      },
-      {
-        src: "/projects/project-04b.jpg",
-        description:
-          "Intermediate scale: repetition and variation are used to maintain order without monotony.",
-      },
-      {
-        src: "/projects/project-04c.jpg",
-        description:
-          "Human-scale moment: the system resolves into spaces that prioritize usability and comfort.",
       },
     ],
   },
