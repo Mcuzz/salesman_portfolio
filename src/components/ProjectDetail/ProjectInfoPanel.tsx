@@ -31,7 +31,7 @@ export default function ProjectInfoPanel({ project, imageIndex }: Props) {
         <img
           src="/logo.png"
           alt="Logo"
-          className="absolute top-20 right-6 h-16 md:h-12 w-auto"
+          className="absolute top-10 right-6 h-16 md:h-12 w-auto"
         />
       </motion.div>
 
@@ -73,7 +73,7 @@ export default function ProjectInfoPanel({ project, imageIndex }: Props) {
         </AnimatePresence>
 
         <h1
-          className={`${Square.className} text-3xl md:text-5xl absolute right-0.5 bottom-4`}
+          className={`${Square.className} text-3xl md:text-5xl absolute right-0.5 bottom-20`}
           style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}
         >
           2025 · 28 · 12

@@ -88,7 +88,7 @@ export default function Hero({
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className={`${Square.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-[0.85] flex flex-col text-[#FFFAFA]`}
+            className={`${Square.className} text-6xl font-bold leading-[0.85] flex flex-col text-[#FFFAFA]`}
           >
             <span>SAL</span>
             <span>ESM</span>
@@ -125,7 +125,7 @@ export default function Hero({
         </div>
 
         {/* Barra dentro del hero */}
-        <div className="absolute z-20 flex justify-end px-6 left-[275px] bottom-[500px] sm:bottom-80 md:bottom-[350px] lg:bottom-[280px] xl:bottom-[85px]">
+        <div className="absolute z-20 flex justify-end px-6 left-[275px] bottom-[115px] w-[calc(100%-275px)]">
           <div className="relative flex w-full max-w-xl px-4 flex-wrap justify-end gap-3 sm:gap-3 lg:flex-nowrap lg:justify-end lg:gap-6">
             {sections.map((sec) => {
               const isActive = activeSection === sec;
