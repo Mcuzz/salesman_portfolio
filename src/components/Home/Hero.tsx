@@ -49,7 +49,7 @@ export default function Hero({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="flex flex-col justify-center gap-3 relative w-full max-w-[1100px] mx-auto overflow-hidden px-6
-        h-[600px] sm:h-[550px] md:h-[500px] lg:h-[450px] xl:h-[670px] -mt-[135px] mb-12"
+        h-[400px] sm:h-[550px] md:h-[500px] lg:h-[450px] xl:h-[370px] -mt-[135px] mb-12"
     >
       {/* Fondo */}
       <motion.div
