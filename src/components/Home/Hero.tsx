@@ -15,7 +15,7 @@ const Square = localFont({
 interface HeroProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
-  navbarInverted: boolean;
+  navbarInverted: int;
   setNavbarInverted: (value: boolean) => void;
 }
 
