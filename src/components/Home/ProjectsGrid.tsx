@@ -5,11 +5,12 @@ import { Project } from "../../data/projects";
 import localFont from "next/font/local";
 
 const Square = localFont({
-  src: "../../fonts/Square.ttf",
+  src: "../../fonts/Geist.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-scrambled",
 });
+
 
 interface ProjectsGridProps {
   projects: Project[];
