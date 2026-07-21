@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 
 
 const Square = localFont({
-  src: "../../fonts/Geist.ttf",
+  src: "../../../fonts/Geist.ttf",
   weight: "600",
   style: "normal",
   variable: "--font-scrambled",

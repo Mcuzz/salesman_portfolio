@@ -6,7 +6,7 @@ import { SectionKey } from "./constants";
 
 const Scrambled = localFont({
   src: "../../fonts/Geist.ttf",
-  weight: "200",
+  weight: "400",
   style: "normal",
   variable: "--font-scrambled",
 });
@@ -46,8 +46,7 @@ export default function AboutHero({ activeSection, onSectionChange }: Props) {
       {/* Nombre */}
       <div className={`${Scrambled.className} absolute left-[10%] top-10 `}>
         <h5 className="text-black text-3xl mb-10">2005.11.15</h5>
-        <h1 className="text-4xl font-semibold">DIEGO-LOPEZ</h1>
-        <h1 className="text-6xl font-bold">RODRIGUEZ--</h1>
+        <h1 className="text-4xl font-bold">DIEGO-LOPEZ</h1>
       </div>
 
       {/* Profesión */}
@@ -55,7 +54,7 @@ export default function AboutHero({ activeSection, onSectionChange }: Props) {
         <h2 className={`${Scrambled.className} text-1md mb-2`}>
           ARQUITECTO
         </h2>
-        <p className="text-md text-justify max-w-[0px]">
+        <p className="text-md text-justify max-w-[300px]">
           Disfruto enfocandome en el diseño de espacios inspiradores y
           funcionales, donde la estructura y la luz definen la experiencia
           del habitar.
