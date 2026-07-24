@@ -34,7 +34,7 @@ export default function ProjectsGrid({
     >
       {/* Encabezado */}
 
-      <div className="max-w-[1200px] mx-auto px-8 mb-14">
+      <div className="max-w-[1130px] mx-auto px-6 mb-14">
         <h2 className={`${Square.className} text-5xl mb-5`}>
           OVERVIEW
         </h2>
@@ -47,7 +47,8 @@ export default function ProjectsGrid({
 
       {/* Tabla */}
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1130px] mx-auto border-b border-black"/>
+      <div className="max-w-[1130px] mx-auto">
     
 
         {/* Filas */}

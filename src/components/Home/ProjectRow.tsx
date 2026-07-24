@@ -31,70 +31,70 @@ export default function ProjectRow({
         layout
         className="
           border-b
-          border-neutral-300
+          border-black
           hover:bg-neutral-50
           transition-colors
         "
       >
         <div
           className="
-            grid
-            grid-cols-[28px_2.2fr_1.5fr_1.2fr_2fr_70px]
-            sm:grid-cols-[40px_2.2fr_1.5fr_1.2fr_2fr_100px]
-            gap-3
-            sm:gap-4
-            items-center
+    grid
+    grid-cols-[1fr_1.3fr_1.2fr_1.6fr]
+    gap-6
+    sm:gap-10
+    items-center
 
-            px-4
-            sm:px-8
-            py-2
-            sm:py-2.5
-          "
+    px-4
+    sm:px-6
+    py-2
+    sm:py-2.5
+  "
         >
-          {/* Botón */}
+          {/* Botón + Proyecto (juntos) */}
+          <div className="flex items-center gap-2 min-w-0">
+            <button
+              onClick={onToggle}
+              className="
+        flex
+        items-center
+        justify-center
 
-          <button
-            onClick={onToggle}
-            className="
-              flex
-              items-center
-              justify-center
+        w-6
+        h-6
 
-              w-6
-              h-6
+        text-lg
+        font-light
 
-              text-lg
-              font-light
+        transition-transform
+        hover:scale-110
+      "
+            >
+              {expanded ? "−" : "+"}
+            </button>
 
-              transition-transform
-              hover:scale-110
-            "
-          >
-            {expanded ? "−" : "+"}
-          </button>
-
-          {/* Proyecto */}
-
-          <h3 className="min-w-0 text-sm font-normal uppercase truncate">
-            {project.title}
-          </h3>
+            <h3 className="min-w-0 text-sm font-normal uppercase truncate">
+              {project.title}
+            </h3>
+          </div>
 
           {/* Tipo */}
-
-          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.type}</div>
+          <div className="min-w-0 text-sm text-neutral-700 truncate">
+            {project.type}
+          </div>
 
           {/* Estado */}
+          <div className="min-w-0 text-sm text-neutral-700 truncate">
+            {project.status}
+          </div>
 
-          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.status}</div>
-
-          {/* Ubicación */}
-
-          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.location}</div>
-
-          {/* Año */}
-
-          <div className="text-right text-sm text-neutral-700">
-            {project.year}
+          {/* Ubicación + Año (juntos) */}
+          <div className="flex items-center justify-end gap-3 min-w-0">
+            <div className="min-w-0 text-sm text-neutral-700 truncate">
+              {project.location}
+            </div>
+            <div className="text-sm text-neutral-700 shrink-0">
+              {project.year}
+            </div>
           </div>
         </div>
       </motion.div>
