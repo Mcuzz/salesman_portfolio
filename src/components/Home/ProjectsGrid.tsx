@@ -47,35 +47,8 @@ export default function ProjectsGrid({
 
       {/* Tabla */}
 
-      <div className="w-full border-t border-neutral-300">
-        {/* Cabecera */}
-
-        <div
-          className="
-            hidden
-            lg:grid
-            grid-cols-[70px_2.2fr_1.5fr_1.2fr_2fr_100px]
-            items-center
-            px-8
-            py-4
-            text-xs
-            uppercase
-            tracking-[0.22em]
-            text-neutral-400
-          "
-        >
-          <div />
-
-          <div>Proyecto</div>
-
-          <div>Tipo</div>
-
-          <div>Estado</div>
-
-          <div>Ubicación</div>
-
-          <div className="text-right">Año</div>
-        </div>
+      <div className="max-w-[1200px] mx-auto">
+    
 
         {/* Filas */}
 

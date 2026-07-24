@@ -1,5 +1,6 @@
 // src/components/Projects/ProjectRow.tsx
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Project } from "@/data/projects";
@@ -16,6 +17,12 @@ export default function ProjectRow({
   expanded,
   onToggle,
 }: ProjectRowProps) {
+  // Mientras la animación de alto corre, necesitamos overflow-hidden
+  // (si no, el contenido se desborda de golpe en vez de "crecer").
+  // Pero ya reposado y abierto, necesitamos overflow-visible para que
+  // la galería pueda romper los límites horizontales del layout.
+  const [allowOverflow, setAllowOverflow] = useState(false);
+
   return (
     <>
       {/* Fila principal */}
@@ -32,13 +39,16 @@ export default function ProjectRow({
         <div
           className="
             grid
-            grid-cols-1
-            lg:grid-cols-[70px_2.2fr_1.5fr_1.2fr_2fr_100px]
-            gap-4
+            grid-cols-[28px_2.2fr_1.5fr_1.2fr_2fr_70px]
+            sm:grid-cols-[40px_2.2fr_1.5fr_1.2fr_2fr_100px]
+            gap-3
+            sm:gap-4
             items-center
 
-            px-8
-            py-8
+            px-4
+            sm:px-8
+            py-2
+            sm:py-2.5
           "
         >
           {/* Botón */}
@@ -50,10 +60,10 @@ export default function ProjectRow({
               items-center
               justify-center
 
-              w-10
-              h-10
+              w-6
+              h-6
 
-              text-3xl
+              text-lg
               font-light
 
               transition-transform
@@ -65,25 +75,21 @@ export default function ProjectRow({
 
           {/* Proyecto */}
 
-          <div>
-            <h3 className="text-2xl leading-none uppercase font-semibold">
-              {project.title}
-            </h3>
-
-            <p className="text-sm text-neutral-500 mt-2">{project.subtitle}</p>
-          </div>
+          <h3 className="min-w-0 text-sm font-normal uppercase truncate">
+            {project.title}
+          </h3>
 
           {/* Tipo */}
 
-          <div className="text-sm text-neutral-700">{project.type}</div>
+          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.type}</div>
 
           {/* Estado */}
 
-          <div className="text-sm text-neutral-700">{project.status}</div>
+          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.status}</div>
 
           {/* Ubicación */}
 
-          <div className="text-sm text-neutral-700">{project.location}</div>
+          <div className="min-w-0 text-sm text-neutral-700 truncate">{project.location}</div>
 
           {/* Año */}
 
@@ -95,7 +101,10 @@ export default function ProjectRow({
 
       {/* Panel desplegable */}
 
-      <AnimatePresence initial={false}>
+      <AnimatePresence
+        initial={false}
+        onExitComplete={() => setAllowOverflow(false)}
+      >
         {expanded && (
           <motion.div
             layout
@@ -115,7 +124,9 @@ export default function ProjectRow({
               duration: 0.35,
               ease: "easeInOut",
             }}
-            className="overflow-hidden"
+            onAnimationStart={() => setAllowOverflow(false)}
+            onAnimationComplete={() => setAllowOverflow(true)}
+            style={{ overflow: allowOverflow ? "visible" : "hidden" }}
           >
             <ProjectExpanded project={project} />
           </motion.div>

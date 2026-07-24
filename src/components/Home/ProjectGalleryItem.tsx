@@ -15,10 +15,12 @@ export default function ProjectGalleryItem({
   return (
     <motion.article
       className="
+        flex
         flex-shrink-0
-        snap-start
+        items-start
+        gap-6
 
-        w-[820px]
+        snap-start
       "
       initial={{
         opacity: 0,
@@ -41,8 +43,9 @@ export default function ProjectGalleryItem({
       <div
         className="
           relative
-          w-full
-          h-[560px]
+          shrink-0
+          w-[300px]
+          h-[210px]
 
           overflow-hidden
 
@@ -53,7 +56,7 @@ export default function ProjectGalleryItem({
           src={image.src}
           alt={image.description}
           fill
-          sizes="820px"
+          sizes="300px"
           className="
             object-cover
             transition-transform
@@ -67,14 +70,14 @@ export default function ProjectGalleryItem({
 
       <div
         className="
-          mt-6
-          max-w-[720px]
+          w-[220px]
+          shrink-0
         "
       >
         <p
           className="
-            text-[15px]
-            leading-7
+            text-[13px]
+            leading-6
             text-neutral-600
           "
         >

@@ -154,12 +154,12 @@ export const projects: Project[] = [
           "Perspectiva general mostrando la integración con el entorno."
       },
       {
-        src: "/projects/project-03b.jpg",
+        src: "/projects/project-04.jpg",
         description:
           "Interior donde predominan la madera y la iluminación natural."
       },
       {
-        src: "/projects/project-03c.jpg",
+        src: "/projects/project-04b.jpg",
         description:
           "Vista aérea explicando la implantación del proyecto."
       }

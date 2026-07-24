@@ -11,20 +11,18 @@ export default function ProjectGallery({
   images,
 }: ProjectGalleryProps) {
   return (
-    <section
-      className="
-        w-screen
-        relative
-
-        left-1/2
-        right-1/2
-
-        -ml-[50vw]
-        -mr-[50vw]
-
-        mt-12
-      "
-    >
+    // dentro de ProjectGallery.tsx, solo esta línea:
+<section
+  className="
+    w-screen
+    relative
+    left-1/2
+    right-1/2
+    -ml-[50vw]
+    -mr-[50vw]
+    mt-2
+  "
+>
       <div
         className="
           flex
@@ -38,9 +36,9 @@ export default function ProjectGallery({
           snap-x
           snap-mandatory
 
-          scrollbar-thin
-          scrollbar-thumb-neutral-400
-          scrollbar-track-transparent
+          [scrollbar-width:none]
+          [-ms-overflow-style:none]
+          [&::-webkit-scrollbar]:hidden
         "
       >
         {images.map((image, index) => (
