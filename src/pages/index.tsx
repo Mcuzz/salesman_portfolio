@@ -9,46 +9,36 @@ import ProjectsGrid from "@/components/Home/ProjectsGrid";
 import { projects } from "@/data/projects";
 
 export default function Home() {
-
-  const [activeProject, setActiveProject] = useState<string | null>(projects[0]?.id ?? null);
-
-  const [activeSection, setActiveSection] = useState(
-    "Architectural projects"
+  const [activeProject, setActiveProject] = useState<string | null>(
+    projects[0]?.id ?? null,
   );
 
-  const [navbarInverted, setNavbarInverted] =
-    useState(false);
+  const [activeSection, setActiveSection] = useState("Architectural projects");
+
+  const [navbarInverted, setNavbarInverted] = useState(false);
 
   return (
     <>
-
       <Navbar inverted={navbarInverted} />
 
       <main className="pt-10">
-
-        <Hero
+        {/* <Hero 
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           navbarInverted={navbarInverted}
           setNavbarInverted={setNavbarInverted}
         />
-
+         */}
         {activeSection === "Architectural projects" && (
-
           <ProjectsGrid
             projects={projects}
             activeProject={activeProject}
             setActiveProject={setActiveProject}
           />
-
         )}
 
-        
-
         <Footer />
-
       </main>
-
     </>
   );
 }
