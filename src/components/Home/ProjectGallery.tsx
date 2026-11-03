@@ -344,7 +344,6 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
     }
   };
 
-  const maxImageScale = 1 + 1.5 * Math.max(0, ...expansionProgress);
 
   return (
     <div className={styles.galleryWrapper}>
@@ -352,11 +351,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
         <div
           ref={trackRef}
           className={styles.track}
-          style={
-            {
-              "--max-image-scale": maxImageScale,
-            } as React.CSSProperties
-          }
+          
           tabIndex={0}
           onScroll={handleScroll}
           onWheel={handleWheel}

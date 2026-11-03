@@ -14,9 +14,6 @@
   height: var(--gallery-image-height);
   overflow: hidden;
   transform-origin: left top;
-  transition:
-  transform 180ms ease-out,
-  margin-right 180ms ease-out;
   background: #e5e5e5;
   will-change: transform;
 }
@@ -32,7 +29,6 @@
   width: 220px;
   padding: 0.25rem;
   background: rgb(255 255 255 / 92%);
-  transition: transform 120ms ease-out;
 }
 
 .caption {

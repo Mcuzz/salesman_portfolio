@@ -1,7 +1,6 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 import { ProjectImage } from "@/data/projects";
 import styles from "@/styles/home/project-gallery-item.module.css";
@@ -22,8 +21,6 @@ export default function ProjectGalleryItem({
   const imageFrameRef = useRef<HTMLDivElement>(null);
 
   const scale = 1 + 1.5 * expansion;
-
-  // Reserva el espacio que ocupa visualmente el crecimiento de la imagen.
   const extraSpace = baseImageWidth * (scale - 1);
 
   useLayoutEffect(() => {
@@ -43,12 +40,8 @@ export default function ProjectGalleryItem({
   }, []);
 
   return (
-    <motion.article
+    <article
       className={styles.item}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.45 }}
       style={{ zIndex: 1 + Math.round(expansion * 10) }}
     >
       <div
@@ -84,6 +77,6 @@ export default function ProjectGalleryItem({
       <div className={styles.description}>
         <p className={styles.caption}>{image.description}</p>
       </div>
-    </motion.article>
+    </article>
   );
 }

@@ -18,7 +18,7 @@ export default function ProjectRow({
 }: ProjectRowProps) {
   return (
     <>
-      <motion.div layout className={styles.row}>
+      <div className={styles.row}>
         <div className={styles.columns}>
           <div className={styles.projectName}>
             <button
@@ -49,31 +49,26 @@ export default function ProjectRow({
             <div className={styles.detail}>{project.year}</div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            layout
-            initial={{
-              opacity: 0,
-              height: 0,
-            }}
-            animate={{
-              opacity: 1,
-              height: "auto",
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-            }}
+            key={project.title}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{
-              duration: 0.35,
-              ease: "easeInOut",
+              height: {
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              },
+              opacity: {
+                duration: 0.3,
+                ease: "easeOut",
+              },
             }}
-            style={{
-              overflow: "visible",
-            }}
+            style={{ overflow: "hidden" }}
           >
             <ProjectExpanded project={project} />
           </motion.div>

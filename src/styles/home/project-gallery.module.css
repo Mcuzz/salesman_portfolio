@@ -22,15 +22,12 @@
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  min-height: calc(
-    var(--gallery-image-height) * var(--max-image-scale, 1) + 1.5rem
-  );
+  min-height: calc(var(--gallery-image-height) * 2.5 + 1.5rem);
   padding: 0 1.5rem 1.5rem 0;
   scroll-behavior: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  transition: min-height 120ms ease-out;
   cursor: grab;
   user-select: none;
 }
