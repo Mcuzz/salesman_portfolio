@@ -1,12 +1,4 @@
 import { motion } from "framer-motion";
-import localFont from "next/font/local";
-
-const Square = localFont({
-  src: "../../../fonts/Geist.ttf",
-  weight: "600",
-  style: "normal",
-  variable: "--font-scrambled",
-});
 
 export default function AboutSection() {
   return (
@@ -15,7 +7,7 @@ export default function AboutSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <h3 className={`${Square.className} text-3xl font-bold mb-4 max-w-[950px] mx-auto`}>
+      <h3 className="text-3xl font-bold mb-4 max-w-[950px] mx-auto">
         SOBRE MI
       </h3>
 

@@ -1,60 +1,66 @@
-// src/components/Navbar/Navbar.tsx
-// no sabe como se ve la pantalla, ni maneja eventos finos, solo conecta piezas.
-
-import localFont from "next/font/local";
-import NavbarLogo from "./NavbarLogo";
-import NavbarLinks from "./NavbarLinks";
-import NavbarMobile from "./NavbarMobile";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import { useNavbarState } from "./useNavbarState";
+import NavbarLinks from "./NavbarLinks";
+import NavbarSearch from "./NavbarSearch";
+import Logo from "@/icons/logo.svg";
 
-const Scrambled = localFont({
-  src: "../../fonts/Geist.ttf",
-  weight: "600",
-  style: "normal",
-});
-
-export default function Navbar({ inverted }: { inverted?: boolean }) {
-  const router = useRouter();
-  const state = useNavbarState(inverted);
-  const isHome = router.pathname === "/";
-  const isInvertedResolved: boolean = isHome ? inverted ?? true : true;
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [copied, setCopied] = useState<string | null>(null);
-  const copy = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(label);
-    setTimeout(() => setCopied(null), 1500);
-  };
 
   return (
-    <header
-      className={`
-        fixed top-0 left-0 right-0 z-[60] backdrop-blur-md border-b shadow-sm
-        transition-colors duration-500
-        ${
-          state.isInverted
-            ? "bg-black border-gray-800"
-            : "bg-white border-gray-200"
-        }
-      `}
-    >
-      <nav className="max-w-[1130px] mx-auto px-6 h-16 flex items-center">
-        <NavbarLogo isInverted={isInvertedResolved} />
+    <header className="fixed inset-x-0 top-0 z-[60] w-full bg-white">
+      <div className="mx-auto w-[calc(100%-32px)] max-w-[1130px] py-5 sm:w-[calc(100%-48px)]">
+        <nav className="flex min-h-7 items-center justify-between ">
+          {/* Logo */}
+          <a
+            href="/"
+            aria-label="Ir a proyectos"
+            className="flex shrink-0 items-center"
+          >
+            <Logo className="h-7 w-auto max-w-[110px]" />
+          </a>
 
-        <NavbarLinks font={Scrambled.className} state={state} />
-      </nav>
+          {/* Navegación de escritorio */}
+          <div className="hidden min-w-0 flex-1 md:flex">
+            <NavbarLinks />
+          </div>
 
-      <NavbarMobile
-        state={{
-          menuOpen,
-          setMenuOpen,
-          isInverted: isInvertedResolved,
-          copy,
-        }}
-      />
+          {/* Buscador de escritorio */}
+          <div className="hidden shrink-0 md:block md:relative md:-left-">
+            <NavbarSearch />
+          </div>
+
+          {/* Botón móvil */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
+            className="flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden"
+          >
+            <span
+              className={`h-px w-5 bg-black transition-transform ${
+                menuOpen ? "translate-y-[3px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-5 bg-black transition-transform ${
+                menuOpen ? "-translate-y-[3px] -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </nav>
+
+        {/* Navegación móvil */}
+        {menuOpen && (
+          <div className="mt-5 border-t border-black/20 pt-5 md:hidden">
+            <NavbarLinks mobile onNavigate={() => setMenuOpen(false)} />
+
+            <div className="mt-5">
+              <NavbarSearch />
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

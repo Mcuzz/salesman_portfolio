@@ -1,44 +1,64 @@
 import { useState } from "react";
 
-import Navbar from "@/components/Navbar/Navbar";
-import Hero from "@/components/Home/Hero/Hero";
-import Footer from "@/components/Home/Footer";
-
 import ProjectsGrid from "@/components/Home/ProjectsGrid";
+import { projects, ProjectCategory } from "@/data/projects";
 
-import { projects } from "@/data/projects";
+import styles from "@/styles/home.module.css";
 
 export default function Home() {
-  const [activeProject, setActiveProject] = useState<string | null>(
-    projects[0]?.id ?? null,
+  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(
+    () => new Set(projects[0] ? [projects[0].id] : []),
   );
 
-  const [activeSection, setActiveSection] = useState("Architectural projects");
+  const [selectedCategories, setSelectedCategories] = useState<
+    ProjectCategory[]
+  >([]);
 
-  const [navbarInverted, setNavbarInverted] = useState(false);
+  const clearFilters = () => {
+    setSelectedCategories([]);
+  };
+
+  const toggleProject = (id: string) => {
+    setExpandedProjects((previous) => {
+      const next = new Set(previous);
+
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+
+      return next;
+    });
+  };
+
+  const toggleCategory = (category: ProjectCategory) => {
+    setSelectedCategories((previous) =>
+      previous.includes(category)
+        ? previous.filter((item) => item !== category)
+        : [...previous, category],
+    );
+  };
+
+  const filteredProjects =
+    selectedCategories.length === 0
+      ? projects
+      : projects.filter((project) =>
+          project.categories.some((category) =>
+            selectedCategories.includes(category),
+          ),
+        );
 
   return (
-    <>
-      <Navbar inverted={navbarInverted} />
-
-      <main className="pt-10">
-        {/* <Hero 
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          navbarInverted={navbarInverted}
-          setNavbarInverted={setNavbarInverted}
-        />
-         */}
-        {activeSection === "Architectural projects" && (
-          <ProjectsGrid
-            projects={projects}
-            activeProject={activeProject}
-            setActiveProject={setActiveProject}
-          />
-        )}
-
-        <Footer />
-      </main>
-    </>
+    <div className={styles.homeMain}>
+      <ProjectsGrid
+        projects={filteredProjects}
+        expandedProjects={expandedProjects}
+        onToggleProject={toggleProject}
+        selectedCategories={selectedCategories}
+        onToggleCategory={toggleCategory}
+        onClearFilters={clearFilters}
+      />
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -6,7 +7,13 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Helvetica", "Arial", "sans-serif"],
+        display: ["Helvetica", "Arial", "sans-serif"],
+        mono: ["Helvetica", "Arial", "sans-serif"],
+      },
+    },
   },
   plugins: [],
-}
+};

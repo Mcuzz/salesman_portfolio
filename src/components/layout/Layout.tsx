@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
 
@@ -7,9 +8,11 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div>
-      <Navbar inverted={true} />
-      <main className="pt-20">{children}</main>
+    <div className="min-h-screen w-full bg-white text-black">
+      <Navbar />
+      <main className="w-full pt-24">
+        {children}
+      </main>
     </div>
   );
 }

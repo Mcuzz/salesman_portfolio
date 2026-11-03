@@ -1,28 +1,28 @@
-// src/components/Home/ProjectsGrid.tsx
-
 import { motion } from "framer-motion";
-import localFont from "next/font/local";
 
-import { Project } from "@/data/projects";
+import { Project, ProjectCategory } from "@/data/projects";
+
 import ProjectRow from "./ProjectRow";
+import ProjectFilters from "./ProjectFilters";
 
-const Square = localFont({
-  src: "../../fonts/Geist.ttf",
-  weight: "600",
-  style: "normal",
-  variable: "--font-square",
-});
+import styles from "@/styles/home/projects-grid.module.css";
 
 interface ProjectsGridProps {
   projects: Project[];
-  activeProject: string | null;
-  setActiveProject: (id: string | null) => void;
+  expandedProjects: Set<string>;
+  onToggleProject: (id: string) => void;
+  selectedCategories: ProjectCategory[];
+  onToggleCategory: (category: ProjectCategory) => void;
+  onClearFilters: () => void;
 }
 
 export default function ProjectsGrid({
   projects,
-  activeProject,
-  setActiveProject,
+  expandedProjects,
+  onToggleProject,
+  selectedCategories,
+  onToggleCategory,
+  onClearFilters,
 }: ProjectsGridProps) {
   return (
     <motion.section
@@ -30,43 +30,29 @@ export default function ProjectsGrid({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.45 }}
-      className="w-full"
+      className={styles.section}
     >
-      {/* Encabezado */}
+      <div className={styles.container}>
+        <ProjectFilters
+          selectedCategories={selectedCategories}
+          onToggleCategory={onToggleCategory}
+          onClearFilters={onClearFilters}
+        />
 
-      <div className="max-w-[1130px] mx-auto px-6 mb-14">
-        <h2 className={`${Square.className} text-5xl mb-5`}>
-          OVERVIEW
-        </h2>
-
-        <p className="max-w-2xl text-neutral-600 leading-relaxed">
-          Vista rápida de los proyectos y conceptos para comprender el enfoque,
-          la metodología y el lenguaje detrás de cada propuesta.
-        </p>
-      </div>
-
-      {/* Tabla */}
-
-      <div className="max-w-[1130px] mx-auto border-b border-black"/>
-      <div className="max-w-[1130px] mx-auto">
-    
-
-        {/* Filas */}
-
-        {projects.map((project) => (
-          <ProjectRow
-            key={project.id}
-            project={project}
-            expanded={activeProject === project.id}
-            onToggle={() =>
-              setActiveProject(
-                activeProject === project.id
-                  ? null
-                  : project.id
-              )
-            }
-          />
-        ))}
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <ProjectRow
+              key={project.id}
+              project={project}
+              expanded={expandedProjects.has(project.id)}
+              onToggle={() => onToggleProject(project.id)}
+            />
+          ))
+        ) : (
+          <p className="border-b border-black py-8 text-center text-xs text-[#999999]">
+            No hay proyectos en esta categoría.
+          </p>
+        )}
       </div>
     </motion.section>
   );

@@ -1,88 +1,88 @@
-// src/components/Projects/ProjectGalleryItem.tsx
 
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { ProjectImage } from "@/data/projects";
+import styles from "@/styles/home/project-gallery-item.module.css";
 
 interface ProjectGalleryItemProps {
   image: ProjectImage;
+  expansion: number;
+  onImageLoad: () => void;
 }
 
 export default function ProjectGalleryItem({
   image,
+  expansion,
+  onImageLoad,
 }: ProjectGalleryItemProps) {
+  const [aspectRatio, setAspectRatio] = useState<number | null>(null);
+  const [baseImageWidth, setBaseImageWidth] = useState(0);
+  const imageFrameRef = useRef<HTMLDivElement>(null);
+
+  const scale = 1 + 1.5 * expansion;
+
+  // Reserva el espacio que ocupa visualmente el crecimiento de la imagen.
+  const extraSpace = baseImageWidth * (scale - 1);
+
+  useLayoutEffect(() => {
+    const imageFrame = imageFrameRef.current;
+    if (!imageFrame) return;
+
+    const updateBaseWidth = () => {
+      setBaseImageWidth(imageFrame.offsetWidth);
+    };
+
+    const resizeObserver = new ResizeObserver(updateBaseWidth);
+
+    resizeObserver.observe(imageFrame);
+    updateBaseWidth();
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <motion.article
-      className="
-        flex
-        flex-shrink-0
-        items-start
-        gap-6
-
-        snap-start
-      "
-      initial={{
-        opacity: 0,
-        y: 30,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        duration: 0.45,
-      }}
+      className={styles.item}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45 }}
+      style={{ zIndex: 1 + Math.round(expansion * 10) }}
     >
-      {/* Imagen */}
-
       <div
-        className="
-          relative
-          shrink-0
-          w-[300px]
-          h-[210px]
-
-          overflow-hidden
-
-          bg-neutral-200
-        "
+        ref={imageFrameRef}
+        className={styles.imageFrame}
+        style={
+          {
+            "--image-ratio": aspectRatio ?? 1.5,
+            transform: `scale(${scale})`,
+            marginRight: `${extraSpace}px`,
+          } as React.CSSProperties
+        }
       >
         <Image
           src={image.src}
           alt={image.description}
           fill
-          sizes="300px"
-          className="
-            object-cover
-            transition-transform
-            duration-500
-            hover:scale-105
-          "
+          sizes="(max-width: 639px) 90vw, 50vw"
+          className={styles.image}
+          onLoad={(event) => {
+            const loadedImage = event.currentTarget;
+
+            if (loadedImage.naturalWidth && loadedImage.naturalHeight) {
+              setAspectRatio(
+                loadedImage.naturalWidth / loadedImage.naturalHeight
+              );
+              onImageLoad();
+            }
+          }}
         />
       </div>
 
-      {/* Descripción */}
-
-      <div
-        className="
-          w-[220px]
-          shrink-0
-        "
-      >
-        <p
-          className="
-            text-[13px]
-            leading-6
-            text-neutral-600
-          "
-        >
-          {image.description}
-        </p>
+      <div className={styles.description}>
+        <p className={styles.caption}>{image.description}</p>
       </div>
     </motion.article>
   );

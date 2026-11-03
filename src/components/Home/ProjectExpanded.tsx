@@ -2,6 +2,7 @@
 
 import { Project } from "@/data/projects";
 import ProjectGallery from "./ProjectGallery";
+import styles from "@/styles/home/project-expanded.module.css";
 
 interface Props {
   project: Project;
@@ -9,7 +10,7 @@ interface Props {
 
 export default function ProjectExpanded({ project }: Props) {
   return (
-    <div className="bg-white">
+    <div className={styles.expanded}>
       <ProjectGallery images={project.images} />
     </div>
   );

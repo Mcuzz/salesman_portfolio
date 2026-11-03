@@ -1,7 +1,6 @@
 // src/components/Projects.tsx
 import { motion } from "framer-motion";
 import Image from "next/image";
-import localFont from "next/font/local";
 import { useState } from "react";
 
 

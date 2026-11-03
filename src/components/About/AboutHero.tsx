@@ -1,15 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-import localFont from "next/font/local";
 import AboutNavigation from "./AboutNav";
 import { SectionKey } from "./constants";
-
-const Scrambled = localFont({
-  src: "../../fonts/Geist.ttf",
-  weight: "400",
-  style: "normal",
-  variable: "--font-scrambled",
-});
 
 interface Props {
   activeSection: SectionKey;
@@ -44,14 +36,14 @@ export default function AboutHero({ activeSection, onSectionChange }: Props) {
       </div>
 
       {/* Nombre */}
-      <div className={`${Scrambled.className} absolute left-[10%] top-10 `}>
+      <div className="absolute left-[10%] top-10">
         <h5 className="text-black text-3xl mb-10">2005.11.15</h5>
         <h1 className="text-4xl font-bold">DIEGO-LOPEZ</h1>
       </div>
 
       {/* Profesión */}
       <div className="absolute left-[10%] bottom-[20%] max-w-sm">
-        <h2 className={`${Scrambled.className} text-1md mb-2`}>
+        <h2 className="text-1md mb-2">
           ARQUITECTO
         </h2>
         <p className="text-md text-justify max-w-[300px]">
