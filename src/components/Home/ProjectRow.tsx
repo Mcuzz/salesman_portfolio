@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Project } from "@/data/projects";
@@ -68,7 +67,10 @@ export default function ProjectRow({
                 ease: "easeOut",
               },
             }}
-            style={{ overflow: "hidden" }}
+            style={{
+              overflowX: "visible",
+              overflowY: "visible",
+            }}
           >
             <ProjectExpanded project={project} />
           </motion.div>
